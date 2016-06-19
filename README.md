@@ -1,4 +1,4 @@
-#nginx-ssl-proxy
+# nginx-ssl-proxy
 This repository is used to build a Docker image that acts as an HTTP [reverse proxy](http://en.wikipedia.org/wiki/Reverse_proxy) with optional (but strongly encouraged) support for acting as an [SSL termination proxy](http://en.wikipedia.org/wiki/SSL_termination_proxy). The proxy can also be configured to enforce [HTTP basic access authentication](http://en.wikipedia.org/wiki/Basic_access_authentication). Nginx is the HTTP server, and its SSL configuration is included (and may be modified to suit your needs) at `nginx/proxy_ssl.conf` in this repository.
 
 ## Building the Image
@@ -41,7 +41,7 @@ To run an SSL termination proxy you must have an existing SSL certificate and ke
       -v /path/to/secrets/dhparam.pem:/etc/secrets/dhparam \
       nginx-ssl-proxy
     ```
-    The really important thing here is that you map in your cert to `/etc/secrets/proxycert`, your key to `/etc/secrets/proxykey`, and your dhparam to `/etc/secrets/dhparam` as shown in the command above. 
+    The really important thing here is that you map in your cert to `/etc/secrets/proxycert`, your key to `/etc/secrets/proxykey`, and your dhparam to `/etc/secrets/dhparam` as shown in the command above.
 
 3. **Enable Basic Access Authentication**
 

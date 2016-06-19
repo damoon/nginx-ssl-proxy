@@ -1,6 +1,13 @@
 # nginx-ssl-proxy
 This repository is used to build a Docker image that acts as an HTTP [reverse proxy](http://en.wikipedia.org/wiki/Reverse_proxy) with optional (but strongly encouraged) support for acting as an [SSL termination proxy](http://en.wikipedia.org/wiki/SSL_termination_proxy). The proxy can also be configured to enforce [HTTP basic access authentication](http://en.wikipedia.org/wiki/Basic_access_authentication). Nginx is the HTTP server, and its SSL configuration is included (and may be modified to suit your needs) at `nginx/proxy_ssl.conf` in this repository.
 
+## Configuration
+
+| Environment Variable | Effect |
+| -------------------- | ------ |
+| INCLUDE              | adds $INCLUDE as include to the proxy vhost |
+
+
 ## Building the Image
 Build the image yourself by cloning this repository then running:
 

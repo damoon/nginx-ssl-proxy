@@ -41,6 +41,33 @@ if [ -n "${ALLOW_INTRANET+1}" ] && [ "${ALLOW_INTRANET,,}" = "true" ]; then
   ALLOW_DENY_FALLBACK='deny'
 fi
 
+# Trust internal proxies to define user ip
+if [ -n "${SET_REAL_IP_FROM_INTRANET+1}" ] && [ "${SET_REAL_IP_FROM_INTRANET,,}" = "true" ]; then
+  echo "Using intranet proxies to find user ip..."
+  sed -i "s/#intranet-set_real_ip_from/set_real_ip_from/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
+# Trust proxy to define user ip
+if [ -n "${SET_REAL_IP_FROM+1}" ]; then
+  echo "Setting trustable proxy..."
+  sed -i "s/#set_real_ip_from/set_real_ip_from/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s/{{SET_REAL_IP_FROM}}/${SET_REAL_IP_FROM}/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
+# Setting header name to read user ip from
+if [ -n "${REAL_IP_HEADER+1}" ]; then
+  echo "Setting header name to read user ip from..."
+  sed -i "s/#real_ip_header/real_ip_header/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s/{{REAL_IP_HEADER}}/${REAL_IP_HEADER}/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
+# Trust proxies recursive to define user ip
+if [ -n "${REAL_IP_RECURSIVE+1}" ]; then
+  echo "Trusting proxies recursive..."
+  sed -i "s/#real_ip_recursive/real_ip_recursive/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s/{{REAL_IP_RECURSIVE}}/${REAL_IP_RECURSIVE}/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
 # Allow access via ip or account
 if [ -n "${SATISFY_ANY+1}" ] && [ "${SATISFY_ANY,,}" = "true" ]; then
   echo "Allowing access for ip based or login authenticated users..."

@@ -19,6 +19,9 @@ FROM nginx:1.10.1
 
 MAINTAINER Evan Brown <evanbrown@google.com>
 
+ENV REAL_IP_HEADER X-Forwarded-For
+ENV REAL_IP_RECURSIVE on
+
 RUN rm /etc/nginx/conf.d/*.conf
 
 RUN mkdir -p /etc/nginx/extra-conf.d

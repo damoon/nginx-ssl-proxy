@@ -14,6 +14,10 @@ This repository is used to build a Docker image that acts as an HTTP [reverse pr
 | ALLOW                | -       | no       | 192.168.0.1 | allows access for ip |
 | DENY                 | -       | no       | 192.168.0.1 | denys access for ip |
 | ALLOW_DENY_FALLBACK  | -       | no       | deny    | if not defined by other config, ip get allow/deny via default fallback behavior |
+| SET_REAL_IP_FROM_INTRANET  | - | no       | true    | trust intranet proxies to provide a valid user ip |
+| SET_REAL_IP_FROM     | -       | no       | 192.168.0.1 | trust an reverse proxy to provide a valid user ip |
+| REAL_IP_HEADER       | X-Forwarded-For | no | X-Real-IP | header to read to get the user ip |
+| REAL_IP_RECURSIVE    | on      | no       | off     | use the trusted proxy, closest to the user, to provide the user ip |
 
 
 ## Building the Image

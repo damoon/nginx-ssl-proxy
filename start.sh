@@ -117,7 +117,13 @@ if [ -n "${SERVICE_PORT_ENV_NAME+1}" ]; then
 fi
 
 # Tell nginx the address and port of the service to proxy to
-sed -i "s/{{TARGET_SERVICE}}/${TARGET_SERVICE}/g;" /etc/nginx/conf.d/proxy.conf
+if [ -n "${TARGET_SERVICE+1}" ]; then
+  echo "Setting target service..."
+  sed -i "s/{{TARGET_SERVICE}}/${TARGET_SERVICE}/g;" /etc/nginx/conf.d/proxy.conf
+else
+  echo "TARGET_SERVICE is undefined"
+  exit 1
+fi
 
 echo "Starting nginx..."
 nginx -g 'daemon off;'

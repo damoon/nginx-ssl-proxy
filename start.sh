@@ -37,14 +37,34 @@ fi
 # Allow intranet and deny all other
 if [ -n "${ALLOW_INTRANET+1}" ] && [ "${ALLOW_INTRANET,,}" = "true" ]; then
   echo "Allowing access for intranet..."
-  sed -i "s/#allow-intranet/allow/g;" /etc/nginx/conf.d/proxy.conf
-  sed -i "s/#deny-all/deny/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s/#intranet-allow/allow/g;" /etc/nginx/conf.d/proxy.conf
+  ALLOW_DENY_FALLBACK='deny'
 fi
 
 # Allow access via ip or account
 if [ -n "${SATISFY_ANY+1}" ] && [ "${SATISFY_ANY,,}" = "true" ]; then
   echo "Allowing access for ip based or login authenticated users..."
   sed -i "s/#satisfy-any/satisfy/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
+# Allowing access
+if [ -n "${ALLOW+1}" ]; then
+  echo "Allowing defined ip..."
+  sed -i "s/#allow/allow/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s/{{ALLOW}}/${ALLOW}/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
+# Denying access
+if [ -n "${DENY+1}" ]; then
+  echo "Denying defined ip..."
+  sed -i "s/#deny/deny/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s/{{DENY}}/${DENY}/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
+# allow/deny default behavior
+if [ -n "${ALLOW_DENY_FALLBACK+1}" ]; then
+  echo "Setting up default allow/deny behavior..."
+  sed -i "s/#{{ALLOW_DENY_FALLBACK}}/${ALLOW_DENY_FALLBACK}/g;" /etc/nginx/conf.d/proxy.conf
 fi
 
 # If the SERVICE_HOST_ENV_NAME and SERVICE_PORT_ENV_NAME vars are provided,

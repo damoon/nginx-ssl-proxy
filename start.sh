@@ -34,6 +34,13 @@ if [ -n "${INCLUDE+1}" ]; then
   sed -i "s/{{INCLUDE}}/${INCLUDE}/g;" /etc/nginx/conf.d/proxy.conf
 fi
 
+# Allow intranet and deny all other
+if [ -n "${ALLOW_INTRANET+1}" ] && [ "${ALLOW_INTRANET,,}" = "true" ]; then
+  echo "Allowing access for intranet..."
+  sed -i "s/#allow-intranet/allow/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s/#deny-all/deny/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
 # If the SERVICE_HOST_ENV_NAME and SERVICE_PORT_ENV_NAME vars are provided,
 # there are two options:
 #  - Option 1:

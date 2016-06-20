@@ -41,6 +41,12 @@ if [ -n "${ALLOW_INTRANET+1}" ] && [ "${ALLOW_INTRANET,,}" = "true" ]; then
   sed -i "s/#deny-all/deny/g;" /etc/nginx/conf.d/proxy.conf
 fi
 
+# Allow access via ip or account
+if [ -n "${SATISFY_ANY+1}" ] && [ "${SATISFY_ANY,,}" = "true" ]; then
+  echo "Allowing access for ip based or login authenticated users..."
+  sed -i "s/#satisfy-any/satisfy/g;" /etc/nginx/conf.d/proxy.conf
+fi
+
 # If the SERVICE_HOST_ENV_NAME and SERVICE_PORT_ENV_NAME vars are provided,
 # there are two options:
 #  - Option 1:

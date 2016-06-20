@@ -3,9 +3,12 @@ This repository is used to build a Docker image that acts as an HTTP [reverse pr
 
 ## Configuration
 
-| Environment Variable | Effect |
-| -------------------- | ------ |
-| INCLUDE              | adds $INCLUDE as include to the proxy vhost |
+| Environment Variable | Default | Required | Example | Effect |
+| -------------------- | ------- | -------- | ------- | ------ |
+| TARGET_SERVICE       | -       | yes      | 127.0.0.1:8080 | the service to proxy to |
+| ENABLE_BASIC_AUTH    | false   | no       | true    | enables basic authentication, uses auth_basic_user_file=/etc/secrets/htpasswd to read logins |
+| ENABLE_SSL           | false   | no       | true    | enables https, redirects from http to https, uses ssl_certificate=/etc/secrets/proxycert, ssl_certificate_key=/etc/secrets/proxykey and  ssl_dhparam=/etc/secrets/dhparam to read the ssl cert |
+| INCLUDE              | -       | no       | /etc/secrets/exta.conf | adds $INCLUDE as include to the proxy vhost |
 
 
 ## Building the Image

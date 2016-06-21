@@ -125,5 +125,11 @@ else
   exit 1
 fi
 
+echo "Setting http port..."
+sed -i "s/{{HTTP_PORT}}/${HTTP_PORT}/g;" /etc/nginx/conf.d/proxy.conf
+
+echo "Setting https port..."
+sed -i "s/{{HTTPS_PORT}}/${HTTPS_PORT}/g;" /etc/nginx/conf.d/proxy.conf
+
 echo "Starting nginx..."
 nginx -g 'daemon off;'

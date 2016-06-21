@@ -21,6 +21,8 @@ MAINTAINER Evan Brown <evanbrown@google.com>
 
 ENV REAL_IP_HEADER X-Forwarded-For
 ENV REAL_IP_RECURSIVE on
+ENV HTTP_PORT 80
+ENV HTTPS_PORT 443
 
 RUN rm /etc/nginx/conf.d/*.conf
 

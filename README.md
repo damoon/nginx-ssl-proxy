@@ -18,6 +18,8 @@ This repository is used to build a Docker image that acts as an HTTP [reverse pr
 | SET_REAL_IP_FROM     | -       | no       | 192.168.0.1 | trust an reverse proxy to provide a valid user ip |
 | REAL_IP_HEADER       | X-Forwarded-For | no | X-Real-IP | header to read to get the user ip |
 | REAL_IP_RECURSIVE    | on      | no       | off     | use the trusted proxy, closest to the user, to provide the user ip |
+| HTTP_PORT            | 80      | no       | 8080    | sets the http port to listen on |
+| HTTPS_PORT           | 443     | no       | 8443    | sets the https port to listen on |
 
 
 ## Building the Image

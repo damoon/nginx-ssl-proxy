@@ -27,6 +27,13 @@ if [ -n "${ENABLE_BASIC_AUTH+1}" ] && [ "${ENABLE_BASIC_AUTH,,}" = "true" ]; the
   sed -i "s/#auth_basic/auth_basic/g;" /etc/nginx/conf.d/proxy.conf
 fi
 
+# If BASIC_AUTH_BASE64 is provided, overwrite password file
+if [ -n "${BASIC_AUTH_BASE64+1}" ]; then
+  echo "Configure basic auth credentials..."
+  mkdir -p /etc/secrets/
+  echo "${BASIC_AUTH_BASE64}" | base64 -d > /etc/secrets/htpasswd
+fi
+
 # If an INCLUDE file is provided, include it
 if [ -n "${INCLUDE+1}" ]; then
   echo "Enabling include..."

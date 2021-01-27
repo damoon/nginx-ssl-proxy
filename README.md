@@ -7,6 +7,7 @@ This repository is used to build a Docker image that acts as an HTTP [reverse pr
 | -------------------- | ------- | -------- | ------- | ------ |
 | TARGET_SERVICE       | -       | yes      | 127.0.0.1:8080 | the service to proxy to |
 | ENABLE_BASIC_AUTH    | false   | no       | true    | enables basic authentication, uses auth_basic_user_file=/etc/secrets/htpasswd to read logins |
+| BASIC_AUTH_BASE64    | -       | no       | IyB0ZXN0OnRlc3QKdGVzdDokYX ByMSRidWN0akk2diRpaWkyY25O bTRsdUpNc3E4YWN2UXYuCg== (created via `cat testing/passwords | base64 -w 0`)    | base64 encoded list of credentials to be placed in /etc/secrets/htpasswd |
 | ENABLE_SSL           | false   | no       | true    | enables https, redirects from http to https, uses ssl_certificate=/etc/secrets/proxycert, ssl_certificate_key=/etc/secrets/proxykey and  ssl_dhparam=/etc/secrets/dhparam to read the ssl cert |
 | INCLUDE              | -       | no       | /etc/secrets/exta.conf | adds $INCLUDE as include to the proxy vhost |
 | ALLOW_INTRANET       | false   | no       | true    | forces ALLOW_DENY_FALLBACK=deny, allows access to ipranges 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16,127.0.0.0/8,169.254.0.0/16 |

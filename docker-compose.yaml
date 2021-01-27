@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+
+  reverse-proxy:
+    build:
+      context: .
+    environment:
+      - TARGET_SERVICE=http-echo:8080
+      - ENABLE_BASIC_AUTH=true
+    volumes:
+       - ./testing/passwords:/etc/secrets/htpasswd
+    depends_on:
+      - http-echo
+    ports:
+      - '8080:80'
+
+  http-echo:
+    image: gcr.io/google_containers/echoserver:1.10

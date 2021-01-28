@@ -63,7 +63,7 @@ fi
 if [ -n "${SET_REAL_IP_FROM+1}" ]; then
   echo "Setting trustable proxy..."
   sed -i "s/#set_real_ip_from/set_real_ip_from/g;" /etc/nginx/conf.d/proxy.conf
-  sed -i "s/{{SET_REAL_IP_FROM}}/${SET_REAL_IP_FROM}/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s={{SET_REAL_IP_FROM}}=${SET_REAL_IP_FROM}=g;" /etc/nginx/conf.d/proxy.conf
 fi
 
 # Setting header name to read user ip from
@@ -90,14 +90,14 @@ fi
 if [ -n "${ALLOW+1}" ]; then
   echo "Allowing defined ip..."
   sed -i "s/#allow/allow/g;" /etc/nginx/conf.d/proxy.conf
-  sed -i "s/{{ALLOW}}/${ALLOW}/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s={{ALLOW}}=${ALLOW}=g;" /etc/nginx/conf.d/proxy.conf
 fi
 
 # Denying access
 if [ -n "${DENY+1}" ]; then
   echo "Denying defined ip..."
   sed -i "s/#deny/deny/g;" /etc/nginx/conf.d/proxy.conf
-  sed -i "s/{{DENY}}/${DENY}/g;" /etc/nginx/conf.d/proxy.conf
+  sed -i "s={{DENY}}=${DENY}=g;" /etc/nginx/conf.d/proxy.conf
 fi
 
 # allow/deny default behavior

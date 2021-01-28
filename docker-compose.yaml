@@ -10,6 +10,9 @@ services:
 #      - ENABLE_ACCESS_LOG=true
 #      - ENABLE_BASIC_AUTH=true
 #      - BASIC_AUTH_BASE64=IyB0ZXN0OnRlc3QKdGVzdDokYXByMSRidWN0akk2diRpaWkyY25ObTRsdUpNc3E4YWN2UXYuCg==
+#      - ALLOW=10.0.0.0/16
+#      - DENY=10.0.0.0/16
+#      - SET_REAL_IP_FROM=10.0.0.0/16
 #    volumes:
 #       - ./testing/passwords:/etc/secrets/htpasswd
     depends_on:

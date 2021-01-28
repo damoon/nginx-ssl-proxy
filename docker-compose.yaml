@@ -7,6 +7,7 @@ services:
       context: .
     environment:
       - TARGET_SERVICE=http-echo:8080
+#      - ENABLE_ACCESS_LOG=true
 #      - ENABLE_BASIC_AUTH=true
 #      - BASIC_AUTH_BASE64=IyB0ZXN0OnRlc3QKdGVzdDokYXByMSRidWN0akk2diRpaWkyY25ObTRsdUpNc3E4YWN2UXYuCg==
 #    volumes:

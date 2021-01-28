@@ -12,6 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 
+if [ -n "${ENABLE_ACCESS_LOG+1}" ] && [ "${ENABLE_ACCESS_LOG,,}" = "true" ]; then
+  echo "Enabling access log..."
+  sed -i "s=access_log off;=access_log /var/log/nginx/access.log  main;=;" /etc/nginx/nginx.conf
+fi
+
 # Env says we're using SSL
 if [ -n "${ENABLE_SSL+1}" ] && [ "${ENABLE_SSL,,}" = "true" ]; then
   echo "Enabling SSL..."

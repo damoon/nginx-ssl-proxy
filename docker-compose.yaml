@@ -2,6 +2,12 @@ version: '3.7'
 
 services:
 
+  caddy:
+    image: caddy:2.2.1-alpine
+    command: caddy reverse-proxy --to reverse-proxy:80
+    ports:
+      - 80:80
+      - 443:443
   reverse-proxy:
     build:
       context: .
